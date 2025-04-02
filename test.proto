@@ -4,6 +4,9 @@ package main;
 
 option go_package = "./proto";
 
+import "google/protobuf/empty.proto";
+
+
 message UserCreateReq {
     int32 id = 1;
     string name = 2;
@@ -23,7 +26,12 @@ message UserGetRes {
     int32 age = 3;
 }
 
+message UserGetAllRes {
+    repeated UserGetRes users = 1;
+}
+
 service testApi {
     rpc CreateUser (UserCreateReq) returns (UserCreateRes);
     rpc GetUser (UserGetReq) returns (UserGetRes);
+    rpc GetAllUsers (google.protobuf.Empty) returns (UserGetAllRes);
 }
